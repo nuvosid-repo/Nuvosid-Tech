@@ -1,0 +1,77 @@
+@use "../abstracts" as *;
+
+// Base surface used by stat tiles, products, process steps, etc.
+.surface {
+  @include surface;
+  position: relative;
+  transition:
+    border-color $dur-base $ease-out,
+    transform $dur-base $ease-out,
+    box-shadow $dur-base $ease-out;
+}
+
+.surface--hover {
+  @include hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+// Small chips/tags ("React", "WebGL", "Core stack")
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: $radius-sm;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-family: $font-mono;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+
+  &--lime {
+    color: var(--accent-2);
+    background: color-mix(in srgb, var(--accent-2) 14%, transparent);
+  }
+  &--muted {
+    color: var(--text-muted);
+    background: transparent;
+    padding-inline: 0;
+  }
+}
+
+// Progress bar under stats
+.meter {
+  height: 6px;
+  border-radius: $radius-pill;
+  background: var(--surface-3);
+  overflow: hidden;
+  span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--gradient-btn);
+    transform-origin: left center;
+  }
+  &--lime span {
+    background: linear-gradient(90deg, var(--accent-2), var(--accent-3));
+  }
+}

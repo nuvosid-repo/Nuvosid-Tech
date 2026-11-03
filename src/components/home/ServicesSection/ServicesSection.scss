@@ -1,0 +1,295 @@
+@use "styles/abstracts" as *;
+
+.services {
+  &__body {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  // ----- List -----
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    // Mobile/tablet: horizontally scrolling tab strip
+    @include down(lg) {
+      flex-direction: row;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 0.5rem;
+      margin-inline: calc(var(--bs-gutter-x) * -0.5);
+      padding-inline: calc(var(--bs-gutter-x) * 0.5);
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  &__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1.05rem 1.1rem;
+    border-radius: $radius-md;
+    text-align: left;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    transition:
+      background-color $dur-base $ease-out,
+      color $dur-base $ease-out,
+      border-color $dur-base $ease-out,
+      padding $dur-base $ease-out;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 1.1rem;
+      right: 1.1rem;
+      bottom: -0.2rem;
+      height: 1px;
+      background: var(--border);
+    }
+
+    &.is-active {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+      @include up(lg) {
+        padding-left: 1.5rem;
+      }
+      &::after {
+        opacity: 0;
+      }
+    }
+
+    @include hover {
+      color: var(--text);
+    }
+
+    @include down(lg) {
+      flex: 0 0 auto;
+      width: auto;
+      grid-template-columns: auto auto;
+      scroll-snap-align: start;
+      padding: 0.75rem 1rem;
+      border-color: var(--border);
+      border-radius: $radius-pill;
+      &::after {
+        display: none;
+      }
+    }
+  }
+  &__num {
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    .is-active & {
+      color: var(--accent);
+    }
+  }
+  &__name {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    letter-spacing: -0.01em;
+    @include down(lg) {
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+  }
+  &__arrow {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: var(--text-faint);
+    transition: all $dur-base $ease-out;
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+    .is-active & {
+      background: var(--gradient-btn);
+      color: var(--on-accent);
+      transform: rotate(45deg);
+    }
+    @include down(lg) {
+      display: none;
+    }
+  }
+
+  // ----- Detail panel -----
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    min-height: 100%;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    overflow: hidden;
+    @include up(lg) {
+      position: sticky;
+      top: calc(#{$nav-height} + 2rem);
+    }
+  }
+  &__panel-glow {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-panel);
+    pointer-events: none;
+  }
+  &__panel-top,
+  &__panel-main,
+  &__footer,
+  [data-anim] {
+    position: relative;
+  }
+  &__panel-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__panel-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-sm;
+    background: var(--gradient-btn);
+    color: var(--on-accent);
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  &__panel-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    @include up(sm) {
+      grid-template-columns: 1fr 150px;
+    }
+    @include up(xl) {
+      grid-template-columns: 1fr 180px;
+    }
+  }
+  &__title {
+    font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+  }
+  &__desc {
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  // Illustration
+  &__visual {
+    position: relative;
+    aspect-ratio: 1;
+    width: 100%;
+    max-width: 180px;
+    justify-self: center;
+    display: grid;
+    place-items: center;
+    @include down(sm) {
+      display: none;
+    }
+  }
+  &__visual-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
+    animation: svc-spin 18s linear infinite;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: 12%;
+      left: 12%;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 14px var(--accent-2);
+    }
+    &--b {
+      inset: 18%;
+      border-style: solid;
+      border-color: var(--border-strong);
+      animation-duration: 11s;
+      animation-direction: reverse;
+      &::after {
+        background: var(--accent);
+        box-shadow: 0 0 14px var(--accent);
+        top: auto;
+        bottom: 4%;
+        left: 50%;
+      }
+    }
+  }
+  &__visual-core {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 44%;
+    aspect-ratio: 1;
+    border-radius: 30%;
+    background: var(--gradient-btn);
+    color: var(--on-accent);
+    box-shadow:
+      0 0 40px color-mix(in srgb, var(--accent) 50%, transparent),
+      inset 0 0 20px rgba(255, 255, 255, 0.35);
+    svg {
+      width: 42%;
+      height: 42%;
+    }
+  }
+
+  &__label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  &__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  &__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto;
+    padding: 1.1rem 1.25rem;
+    border-radius: $radius-md;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+  }
+  &__metric {
+    margin-top: 0.25rem;
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--accent-2);
+  }
+}
+
+@keyframes svc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@include reduced-motion {
+  .services__visual-ring {
+    animation: none;
+  }
+}

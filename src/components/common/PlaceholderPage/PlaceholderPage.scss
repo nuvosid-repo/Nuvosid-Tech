@@ -1,0 +1,21 @@
+@use "styles/abstracts" as *;
+
+.placeholder-page {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: calc(#{$nav-height} + 6rem) 0 6rem;
+  overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: auto -10% -40% 30%;
+    height: 80%;
+    background: var(--gradient-glow);
+    pointer-events: none;
+  }
+  .lead-c {
+    max-width: 52ch;
+  }
+}

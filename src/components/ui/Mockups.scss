@@ -1,0 +1,203 @@
+@use "styles/abstracts" as *;
+
+.mockup {
+  position: relative;
+  width: 100%;
+  border-radius: $radius-md;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+
+  &__bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+    span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border-strong);
+      &:first-child {
+        background: var(--accent);
+      }
+    }
+    em {
+      margin-left: 0.5rem;
+      font-style: normal;
+      font-family: $font-mono;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+    }
+  }
+  &__body {
+    display: grid;
+    gap: 0.75rem;
+    padding: 0.85rem;
+  }
+  &__svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  &--project {
+    background:
+      radial-gradient(80% 60% at 70% 30%, color-mix(in srgb, var(--accent) 14%, transparent), transparent),
+      var(--surface-2);
+  }
+  &--dark {
+    background:
+      radial-gradient(60% 60% at 50% 55%, color-mix(in srgb, var(--accent) 22%, transparent), transparent),
+      var(--bg-deep);
+  }
+}
+
+.mk-line {
+  stroke: color-mix(in srgb, var(--accent) 40%, transparent);
+  stroke-width: 0.8;
+}
+.mk-node {
+  fill: var(--accent);
+  &--hot {
+    fill: var(--accent-strong);
+    filter: drop-shadow(0 0 4px var(--accent));
+  }
+  &--lime {
+    fill: var(--accent-2);
+    filter: drop-shadow(0 0 4px var(--accent-2));
+  }
+}
+.mk-grid {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.mk-stroke {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  &--lime {
+    stroke: var(--accent-2);
+  }
+}
+.mk-px {
+  fill: var(--accent);
+  opacity: 0.75;
+  &--lime {
+    fill: var(--accent-2);
+    opacity: 1;
+  }
+}
+.mk-ring {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.mk-sweep {
+  fill: color-mix(in srgb, var(--accent) 22%, transparent);
+  transform-origin: 100px 100px;
+  animation: mk-sweep 4s linear infinite;
+}
+@keyframes mk-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mk-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 56px;
+  span {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+    background: color-mix(in srgb, var(--accent) 35%, transparent);
+    &.is-hot {
+      background: var(--accent-2);
+    }
+  }
+}
+.mk-row {
+  display: flex;
+  gap: 0.5rem;
+}
+.mk-kpi {
+  flex: 1;
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  small {
+    display: block;
+    font-family: $font-mono;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  strong {
+    font-family: $font-display;
+    font-size: 0.95rem;
+    color: var(--accent);
+    &.is-lime {
+      color: var(--accent-2);
+    }
+  }
+}
+.mk-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  &--wide {
+    grid-template-columns: 2fr 1fr;
+  }
+  &--side {
+    grid-template-columns: 90px 1fr;
+    align-items: start;
+  }
+}
+.mk-stack {
+  display: grid;
+  gap: 0.5rem;
+}
+.mk-list {
+  display: grid;
+  gap: 0.4rem;
+  span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 6px;
+    background: var(--surface-3);
+    font-family: $font-mono;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    &::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-faint);
+    }
+    &.is-ok::before {
+      background: var(--accent);
+    }
+    &.is-warn::before {
+      background: var(--accent-2);
+    }
+  }
+}
+
+@include reduced-motion {
+  .mk-sweep {
+    animation: none;
+  }
+}

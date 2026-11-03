@@ -1,0 +1,77 @@
+@use "styles/abstracts" as *;
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: $z-preloader;
+  display: grid;
+  place-items: center;
+  background: var(--bg-deep);
+  overflow: hidden;
+
+  &__glow {
+    position: absolute;
+    inset: -20%;
+    background: var(--gradient-glow);
+    opacity: 0.6;
+  }
+
+  &__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+    width: min(420px, 84vw);
+  }
+
+  &__logo .logo__img {
+    height: clamp(44px, 9vw, 64px);
+  }
+
+  &__tagline {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    > span {
+      overflow: hidden;
+      display: inline-block;
+    }
+    > span > span {
+      display: inline-block;
+    }
+    > span:last-child {
+      color: var(--accent);
+    }
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+  &__bar {
+    flex: 1;
+    height: 2px;
+    background: var(--border-strong);
+    overflow: hidden;
+    border-radius: 2px;
+    span {
+      display: block;
+      height: 100%;
+      background: var(--gradient-btn);
+      transform-origin: left;
+    }
+  }
+  &__count {
+    font-size: 0.8rem;
+    color: var(--text);
+    min-width: 3ch;
+  }
+}

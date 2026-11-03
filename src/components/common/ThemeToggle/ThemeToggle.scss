@@ -1,0 +1,51 @@
+@use "styles/abstracts" as *;
+
+.theme-toggle {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition:
+    border-color $dur-base $ease-out,
+    color $dur-base;
+
+  @include hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  &__icon {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    transition:
+      transform 0.6s $ease-out,
+      opacity 0.4s;
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  // Icon reflects the current theme; driven by the html attribute so it is
+  // correct on first paint (no hydration flicker).
+  &__icon--sun {
+    transform: translateY(120%) rotate(90deg);
+    opacity: 0;
+  }
+  [data-theme="light"] & &__icon--sun {
+    transform: none;
+    opacity: 1;
+  }
+  [data-theme="light"] & &__icon--moon {
+    transform: translateY(-120%) rotate(-90deg);
+    opacity: 0;
+  }
+}

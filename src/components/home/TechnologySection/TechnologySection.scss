@@ -1,0 +1,65 @@
+@use "styles/abstracts" as *;
+
+.tech {
+  position: relative;
+  padding-block: clamp(3.5rem, 7vw, 5.5rem);
+  border-block: 1px solid var(--border);
+  overflow: hidden;
+
+  &__marquee {
+    position: relative;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    &:focus-visible {
+      outline-offset: -2px;
+    }
+  }
+  &__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+  &__group {
+    display: flex;
+    gap: 1rem;
+    padding-right: 1rem; // keeps spacing identical across the seam
+  }
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 1.4rem 0.7rem 0.75rem;
+    border-radius: $radius-pill;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    transition:
+      border-color $dur-base,
+      transform $dur-base $ease-out;
+    @include hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+  }
+  &__logo {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    svg {
+      width: 19px;
+      height: 19px;
+    }
+  }
+  &__name {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+}

@@ -1,0 +1,105 @@
+@use "styles/abstracts" as *;
+
+.cta {
+  padding-block: $section-space-sm;
+
+  &__panel {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: $radius-xl;
+    padding-block: clamp(5rem, 12vw, 9rem);
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    text-align: center;
+    [data-theme="light"] & {
+      background: linear-gradient(180deg, var(--surface) 0%, var(--bg-alt) 100%);
+    }
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+  }
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(30px);
+    background: var(--gradient-glow);
+    animation: cta-float 12s $ease-in-out infinite alternate;
+    &--a {
+      width: 70%;
+      aspect-ratio: 1.6;
+      left: 15%;
+      bottom: -45%;
+    }
+    &--b {
+      width: 40%;
+      aspect-ratio: 1;
+      right: -10%;
+      top: -30%;
+      opacity: 0.5;
+      animation-duration: 16s;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--accent-2) 25%, transparent), transparent);
+    }
+  }
+  &__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 60% 70% at 50% 100%, #000, transparent);
+  }
+  &__canvas {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__title {
+    margin-top: 1.5rem;
+    font-size: clamp(2.4rem, 6.4vw, 6rem);
+  }
+  &__lead {
+    max-width: 56ch;
+    margin-top: 1.5rem;
+  }
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+  &__email {
+    margin-top: 1.5rem;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+}
+
+@keyframes cta-float {
+  to {
+    transform: translate3d(4%, -6%, 0) scale(1.08);
+  }
+}
+@include reduced-motion {
+  .cta__orb {
+    animation: none;
+  }
+}

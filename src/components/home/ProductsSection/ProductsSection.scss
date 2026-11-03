@@ -1,0 +1,105 @@
+@use "styles/abstracts" as *;
+
+.products {
+  &__grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    grid-template-columns: 1fr;
+    @include up(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @include up(lg) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: start;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    @include up(lg) {
+      &.is-raised {
+        margin-top: -2.5rem;
+      }
+    }
+  }
+
+  &__visual {
+    margin: -0.25rem -0.25rem 1.5rem;
+  }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-sm;
+    background: var(--accent-soft);
+    color: var(--accent);
+    svg {
+      width: 17px;
+      height: 17px;
+    }
+    .is-lime & {
+      color: var(--accent-2);
+      background: color-mix(in srgb, var(--accent-2) 14%, transparent);
+    }
+  }
+  &__name {
+    margin-top: 1.1rem;
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+    line-height: 1.1;
+  }
+  &__desc {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  &__specs {
+    display: grid;
+    gap: 0.45rem;
+    margin: 1.4rem 0;
+    padding: 0.9rem 1rem;
+    border-radius: $radius-sm;
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    dt,
+    dd {
+      margin: 0;
+      font-family: $font-mono;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    dt {
+      font-weight: 400;
+      color: var(--text-faint);
+    }
+    dd {
+      color: var(--accent);
+      text-align: right;
+    }
+    .is-lime & dd {
+      color: var(--accent-2);
+    }
+  }
+  &__link {
+    margin-top: auto;
+    .is-lime & {
+      color: var(--accent-2);
+    }
+  }
+}

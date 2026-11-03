@@ -1,0 +1,31 @@
+@use "styles/abstracts" as *;
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+
+  &__img {
+    width: auto;
+    height: 38px;
+    @include down(sm) {
+      height: 28px;
+    }
+  }
+  &--full &__img {
+    height: 56px;
+  }
+
+  // Show the version matching the active theme
+  &__img--light {
+    display: none;
+  }
+  [data-theme="light"] & {
+    .logo__img--dark {
+      display: none;
+    }
+    .logo__img--light {
+      display: block;
+    }
+  }
+}

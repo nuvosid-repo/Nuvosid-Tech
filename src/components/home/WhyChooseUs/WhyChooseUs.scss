@@ -1,0 +1,114 @@
+@use "styles/abstracts" as *;
+
+.why {
+  &__list {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  &__row {
+    position: relative;
+    display: grid;
+    gap: 0.75rem 2rem;
+    padding-block: clamp(1.75rem, 3vw, 2.5rem);
+    grid-template-columns: 4rem 1fr;
+    transition: background-color $dur-base;
+
+    @include up(md) {
+      grid-template-columns: 7rem 1fr 1.25fr;
+      align-items: center;
+    }
+    @include up(lg) {
+      grid-template-columns: 12rem 1fr 1.3fr;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 -1.5rem;
+      border-radius: $radius-lg;
+      background: var(--gradient-panel);
+      opacity: 0;
+      transition: opacity $dur-base;
+      pointer-events: none;
+    }
+    @include hover {
+      &::before {
+        opacity: 1;
+      }
+      .why__num {
+        -webkit-text-stroke-color: transparent;
+        color: var(--accent);
+      }
+      &.is-lime .why__num {
+        color: var(--accent-2);
+      }
+    }
+  }
+
+  &__rule {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--border-strong);
+    transform-origin: left;
+  }
+
+  &__num {
+    position: relative;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 4.5vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent);
+    transition:
+      color $dur-base,
+      -webkit-text-stroke-color $dur-base;
+    .is-lime & {
+      -webkit-text-stroke-color: var(--accent-2);
+    }
+  }
+
+  &__heading {
+    position: relative;
+  }
+  &__title {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    letter-spacing: -0.02em;
+  }
+  &__subtitle {
+    margin-top: 0.4rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    color: var(--accent);
+    .is-lime & {
+      color: var(--accent-2);
+    }
+  }
+  &__accent {
+    display: block;
+    width: 64px;
+    height: 2px;
+    margin-top: 0.75rem;
+    border-radius: 2px;
+    background: var(--gradient-btn);
+    transform-origin: left;
+    .is-lime & {
+      background: var(--accent-2);
+    }
+  }
+
+  &__text {
+    position: relative;
+    grid-column: 2;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    @include up(md) {
+      grid-column: 3;
+    }
+  }
+}

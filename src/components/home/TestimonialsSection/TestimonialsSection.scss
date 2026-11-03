@@ -1,0 +1,127 @@
+@use "styles/abstracts" as *;
+
+.testimonials {
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  &__count {
+    margin-right: 0.5rem;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+
+  &__card {
+    position: relative;
+    margin: 0;
+    padding: clamp(1.75rem, 5vw, 4rem);
+    border-radius: $radius-xl;
+    overflow: hidden;
+    &::after {
+      content: "";
+      position: absolute;
+      right: -15%;
+      bottom: -60%;
+      width: 60%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--gradient-glow);
+      pointer-events: none;
+    }
+  }
+  &__mark {
+    display: inline-grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: $radius-sm;
+    background: var(--accent-soft);
+    color: var(--accent);
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  &__quote {
+    position: relative;
+    margin-top: 1.75rem;
+    p {
+      max-width: 30ch;
+      font-family: $font-display;
+      font-weight: 600;
+      font-size: clamp(1.4rem, 3vw, 2.5rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      @include up(lg) {
+        max-width: 36ch;
+      }
+    }
+  }
+  &__author {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 2.25rem;
+    strong {
+      display: block;
+      font-family: $font-display;
+      font-size: 1rem;
+    }
+    small {
+      display: block;
+      font-family: $font-mono;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+  }
+  &__avatar {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gradient-btn);
+    color: var(--on-accent);
+    font-family: $font-mono;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  &__dots {
+    position: relative;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    button {
+      width: 28px;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--border-strong);
+      transition:
+        width $dur-base $ease-out,
+        background-color $dur-base;
+      // enlarge hit area without changing visuals
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        inset: -10px -2px;
+      }
+      &.is-active {
+        width: 52px;
+        background: var(--accent);
+      }
+    }
+  }
+}

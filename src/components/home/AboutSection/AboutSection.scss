@@ -1,0 +1,148 @@
+@use "styles/abstracts" as *;
+
+.about {
+  overflow: hidden;
+
+  &__orbit {
+    position: absolute;
+    width: 720px;
+    height: 720px;
+    right: -260px;
+    top: -200px;
+    border-radius: 50%;
+    border: 1px dashed color-mix(in srgb, var(--accent) 20%, transparent);
+    pointer-events: none;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+    &::before {
+      inset: 90px;
+      border: 1px solid var(--border);
+    }
+    &::after {
+      width: 12px;
+      height: 12px;
+      top: 50%;
+      left: -6px;
+      background: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+    }
+  }
+
+  &__sticky {
+    @include up(lg) {
+      position: sticky;
+      top: calc(#{$nav-height} + 3rem);
+    }
+  }
+
+  &__copy {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 2rem;
+    justify-items: start;
+    max-width: 48ch;
+  }
+
+  &__stats {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include down(sm) {
+      grid-template-columns: 1fr;
+    }
+    // Staggered editorial offset on desktop
+    @include up(lg) {
+      > :nth-child(even) {
+        margin-top: 3.5rem;
+        margin-bottom: -3.5rem;
+      }
+      padding-bottom: 3.5rem;
+    }
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    min-height: 300px;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-panel);
+      opacity: 0;
+      transition: opacity $dur-base;
+      pointer-events: none;
+    }
+    @include hover {
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+  &__stat-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__stat-eyebrow {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  &__stat-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: $radius-sm;
+    background: var(--accent-soft);
+    color: var(--accent);
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  .is-lime &__stat-icon {
+    color: var(--accent-2);
+    background: color-mix(in srgb, var(--accent-2) 14%, transparent);
+  }
+
+  &__value {
+    margin-top: auto;
+    padding-top: 2rem;
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 4.4vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+  }
+  .is-lime &__value {
+    color: var(--accent-2);
+  }
+  &__value-affix {
+    font-size: 0.45em;
+    letter-spacing: -0.02em;
+    color: var(--text-faint);
+  }
+  &__stat-title {
+    margin-top: 0.75rem;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+  }
+  &__stat-text {
+    margin: 0.5rem 0 1.25rem;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+  }
+  .meter {
+    position: relative;
+  }
+}

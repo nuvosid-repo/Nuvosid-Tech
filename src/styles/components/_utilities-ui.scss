@@ -1,0 +1,113 @@
+@use "../abstracts" as *;
+
+// Scroll progress
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: $z-progress;
+  pointer-events: none;
+  span {
+    display: block;
+    height: 100%;
+    background: var(--gradient-text);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+}
+
+// Back to top
+.back-to-top {
+  position: fixed;
+  right: clamp(1rem, 2.5vw, 2rem);
+  bottom: clamp(1rem, 2.5vw, 2rem);
+  z-index: $z-nav - 1;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition:
+    opacity $dur-base $ease-out,
+    transform $dur-base $ease-out,
+    visibility $dur-base,
+    color $dur-fast;
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  > svg:first-child {
+    position: absolute;
+    inset: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    transform: rotate(-90deg);
+  }
+  > svg:last-child {
+    width: 18px;
+    height: 18px;
+  }
+  &__track,
+  &__ring {
+    fill: none;
+    stroke-width: 2;
+  }
+  &__track {
+    stroke: var(--border);
+  }
+  &__ring {
+    stroke: var(--accent);
+    stroke-linecap: round;
+  }
+  @include hover {
+    color: var(--accent);
+  }
+}
+
+// Cursor follower
+.cursor-ring,
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $z-cursor;
+  pointer-events: none;
+  border-radius: 50%;
+  visibility: hidden;
+}
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  transition:
+    width 0.35s $ease-out,
+    height 0.35s $ease-out,
+    background-color 0.35s,
+    border-color 0.35s;
+  &.is-hover {
+    width: 64px;
+    height: 64px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border-color: transparent;
+  }
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor-ring,
+  .cursor-dot {
+    display: none;
+  }
+}

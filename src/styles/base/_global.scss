@@ -1,0 +1,171 @@
+@use "../abstracts" as *;
+
+// =============================================================
+// Theme tokens — CSS custom properties
+// Dark is the approved default; light has its own treatment
+// (warm cream, white surfaces, navy type) — not an inversion.
+// =============================================================
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #{$charcoal-800};
+  --bg-alt: #{$charcoal-700};
+  --bg-deep: #{$charcoal-900};
+  --surface: #{$forest-800};
+  --surface-2: #{$forest-700};
+  --surface-3: #{$forest-600};
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  --text: #f1f5f3;
+  --text-muted: rgba(225, 236, 231, 0.64);
+  --text-faint: rgba(225, 236, 231, 0.4);
+
+  --accent: #{$emerald-bright};
+  --accent-strong: #{$mint};
+  --accent-soft: rgba(0, 214, 160, 0.12);
+  --accent-2: #{$lime};
+  --accent-3: #{$teal};
+  --on-accent: #{$charcoal-900};
+
+  --gradient-text: linear-gradient(90deg, #{$emerald-bright} 0%, #{$mint} 45%, #{$lime} 100%);
+  --gradient-btn: linear-gradient(100deg, #{$emerald-bright} 0%, #{$mint} 100%);
+  --gradient-glow: radial-gradient(60% 60% at 50% 50%, rgba(0, 214, 160, 0.22) 0%, rgba(0, 214, 160, 0) 70%);
+  --gradient-panel: linear-gradient(140deg, rgba(0, 169, 130, 0.22) 0%, rgba(17, 25, 22, 0) 55%);
+
+  --nav-bg: rgba(10, 15, 13, 0.72);
+  --shadow-lg: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 32px rgba(0, 214, 160, 0.35);
+  --grid-line: rgba(255, 255, 255, 0.035);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #{$cream-100};
+  --bg-alt: #{$cream-200};
+  --bg-deep: #e8e1d2;
+  --surface: #{$white};
+  --surface-2: #fbf9f4;
+  --surface-3: #f1ede4;
+  --border: rgba(11, 27, 43, 0.09);
+  --border-strong: rgba(11, 27, 43, 0.18);
+
+  --text: #{$navy-900};
+  --text-muted: rgba(11, 27, 43, 0.68);
+  --text-faint: rgba(11, 27, 43, 0.45);
+
+  --accent: #{$emerald};
+  --accent-strong: #{$emerald-deep};
+  --accent-soft: rgba(0, 169, 130, 0.1);
+  --accent-2: #{$emerald-deep};
+  --accent-3: #{$emerald};
+  --on-accent: #{$white};
+
+  --gradient-text: linear-gradient(90deg, #{$emerald-deep} 0%, #{$emerald} 55%, #{$teal} 100%);
+  --gradient-btn: linear-gradient(100deg, #{$emerald} 0%, #{$emerald-bright} 100%);
+  --gradient-glow: radial-gradient(60% 60% at 50% 50%, rgba(101, 240, 197, 0.45) 0%, rgba(101, 240, 197, 0) 70%);
+  --gradient-panel: linear-gradient(140deg, rgba(101, 240, 197, 0.35) 0%, rgba(255, 255, 255, 0) 55%);
+
+  --nav-bg: rgba(246, 242, 233, 0.78);
+  --shadow-lg: 0 30px 70px -35px rgba(11, 27, 43, 0.28);
+  --shadow-glow: 0 10px 30px -8px rgba(0, 169, 130, 0.45);
+  --grid-line: rgba(11, 27, 43, 0.04);
+}
+
+// Smooth theme cross-fade (only while toggling — class set by ThemeToggle)
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 0.5s $ease-out,
+    border-color 0.5s $ease-out,
+    color 0.5s $ease-out,
+    fill 0.5s $ease-out !important;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: $font-body;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+// Lock scroll while preloader / mobile menu is open
+html.is-locked,
+html.is-locked body {
+  overflow: hidden;
+}
+
+// Lenis
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+// ---------- Layout helpers ----------
+.section {
+  position: relative;
+  padding-block: $section-space;
+}
+.section--alt {
+  background: var(--bg-alt);
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: $z-preloader + 1;
+  padding: 0.75rem 1.25rem;
+  border-radius: $radius-pill;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  transform: translateY(-200%);
+  transition: transform $dur-fast;
+  &:focus {
+    transform: none;
+  }
+}
+
+.sr-only {
+  @include visually-hidden;
+}
+
+// Elements animated in by GSAP start hidden only once JS is ready,
+// so content stays visible without JS / with reduced motion.
+.js-ready [data-reveal] {
+  visibility: hidden;
+}
+@include reduced-motion {
+  .js-ready [data-reveal] {
+    visibility: visible !important;
+  }
+}
+
+// ---------- Focus ----------
+a,
+button,
+input,
+[tabindex] {
+  @include focus-ring;
+}

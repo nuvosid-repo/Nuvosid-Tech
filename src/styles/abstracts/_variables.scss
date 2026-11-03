@@ -1,0 +1,70 @@
+// =============================================================
+// NUVOSID TECH — Design tokens (Sass)
+// Theme-dependent values live as CSS custom properties in
+// base/_global.scss. Sass vars here are for static brand values,
+// breakpoints, spacing and motion.
+// =============================================================
+
+// Brand palette (do not add new hues — use shades of these)
+$emerald: #00a982; // Primary Emerald
+$emerald-bright: #00d6a0; // Bright Emerald
+$mint: #65f0c5;
+$teal: #20d6b5;
+$lime: #c7f36b;
+$emerald-deep: #00876a; // shade of $emerald — used for light-mode text contrast
+
+// Neutrals
+$charcoal-900: #070b0a;
+$charcoal-800: #0a0f0d;
+$charcoal-700: #0e1513;
+$forest-800: #111916;
+$forest-700: #16201c;
+$forest-600: #1c2823;
+$navy-900: #0b1b2b;
+$cream-100: #f6f2e9;
+$cream-200: #efe9dc;
+$white: #ffffff;
+
+// Typography
+$font-display: var(--font-display), "Space Grotesk", system-ui, sans-serif;
+$font-body: var(--font-body), "Inter", system-ui, sans-serif;
+$font-mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
+
+// Breakpoints (mirror Bootstrap 5)
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+// Layout
+$container-max: 1320px;
+$nav-height: 84px;
+$section-space: clamp(5rem, 10vw, 9rem);
+$section-space-sm: clamp(3.5rem, 7vw, 6rem);
+
+// Radius
+$radius-sm: 10px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-xl: 32px;
+$radius-pill: 999px;
+
+// Motion
+$ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+$ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+$dur-fast: 0.2s;
+$dur-base: 0.4s;
+$dur-slow: 0.8s;
+
+// Z-index scale
+$z-canvas: 0;
+$z-content: 2;
+$z-nav: 100;
+$z-progress: 110;
+$z-mobile-menu: 120;
+$z-cursor: 9000;
+$z-preloader: 9999;

@@ -1,0 +1,12 @@
+// =============================================================
+// NUVOSID TECH — global stylesheet
+// Section/component styles are co-located with their components.
+// =============================================================
+@use "styles/vendor/bootstrap";
+@use "styles/base/reset";
+@use "styles/base/global";
+@use "styles/base/typography";
+@use "styles/components/buttons";
+@use "styles/components/cards";
+@use "styles/components/navigation";
+@use "styles/components/utilities-ui";

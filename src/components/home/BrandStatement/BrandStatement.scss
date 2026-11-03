@@ -1,0 +1,44 @@
+@use "styles/abstracts" as *;
+
+.brand-statement {
+  border-top: 1px solid var(--border);
+
+  &__title {
+    font-size: clamp(2.4rem, 5.4vw, 5rem);
+    line-height: 1;
+    // Highlighted line gets an animated underline
+    .text-gradient {
+      padding-bottom: 0.05em;
+    }
+  }
+
+  &__aside {
+    @include up(lg) {
+      padding-top: 0.5rem;
+    }
+  }
+
+  &__signature {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: $radius-sm;
+    background: var(--accent-soft);
+    color: var(--accent);
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
